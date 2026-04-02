@@ -263,6 +263,12 @@ button {
   gap: 1rem;
 }
 
+@media (max-width: 640px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Language Toggle UI */
 .lang-toggle-container {
   display: flex;
