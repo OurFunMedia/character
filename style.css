@@ -262,3 +262,92 @@ button {
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
 }
+
+/* Language Toggle UI */
+.lang-toggle-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.lang-toggle-group {
+  display: inline-flex;
+  background: var(--input-bg);
+  padding: 0.25rem;
+  border-radius: 2rem;
+  border: 1px solid var(--glass-border);
+}
+
+.lang-btn {
+  padding: 0.4rem 1rem;
+  font-size: 0.75rem;
+  border-radius: 1.5rem;
+  background: transparent;
+  color: var(--text-muted);
+  flex: none;
+  width: auto;
+  min-width: 60px;
+}
+
+.lang-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: none;
+  box-shadow: none;
+}
+
+.lang-btn.active {
+  background: var(--accent-color);
+  color: var(--primary-bg);
+}
+
+/* Language Visibility Logic */
+body[data-lang="zh"] .lang-en,
+body[data-lang="zh"] .lang-sep {
+  display: none !important;
+}
+
+body[data-lang="en"] .lang-zh,
+body[data-lang="en"] .lang-sep {
+  display: none !important;
+}
+
+body[data-lang="both"] .lang-zh,
+body[data-lang="both"] .lang-en,
+body[data-lang="both"] .lang-sep {
+  display: inline;
+}
+
+/* Footer Styling */
+.footer {
+  text-align: center;
+  margin-top: 3rem;
+  padding: 2rem 1rem;
+  border-top: 1px solid var(--glass-border);
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(10px);
+}
+
+.footer a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  transition: all 0.3s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  border: 1px solid transparent;
+}
+
+.footer a:hover {
+  color: var(--accent-color);
+  background: rgba(56, 189, 248, 0.1);
+  border-color: rgba(56, 189, 248, 0.2);
+  transform: translateY(-2px);
+}
+
+.footer i {
+  width: 18px;
+  height: 18px;
+}

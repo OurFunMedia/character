@@ -16,6 +16,7 @@ const defaults = {
   cup: 'E',
   measureDetail: '有明顯體積感',
   clothing: '二件式藍邊白色泳裝，布料貼合身形，側邊細繩，赤腳',
+  clothingTemplate: 'swimsuit',
   aspectRatio: '3:2',
   race: '東亞少女',
   skinColor: '暖白通透',
@@ -149,15 +150,11 @@ const translations = {
   },
   measureDetail: {
     '自然型態': 'natural shape',
-    '有明顯體積感': 'visible volume / full bust',
-    '挺拔有型': 'firm and perky shape',
-    '柔軟自然垂墜': 'soft and natural drooping',
-    '深邃曲線': 'deep defined cleavage',
-    '動感起伏': 'dynamic heaving'
+    '有明顯體積感': 'naturally proportioned upper body where the bust has a perceptible sense of volume and weight, featuring full contours that respond organically to posture and gravity with a balanced drape that harmonizes with the overall physique'
   },
   charStyle: {
-    '真人角色': 'photorealistic style, natural look, visible pores, skin texture, cinematography, sharp focus',
-    '動漫角色': 'anime style, 2D art, high quality illustration, clean lines, vibrant colors'
+    '真人角色': 'Ultra-realistic raw photo, hyper-detailed skin texture, visible pores, subsurface scattering, natural look, shot on 85mm lens, f/1.8, cinematic lighting, 8k UHD, masterpiece, highly detailed',
+    '動漫角色': 'high quality anime style, 2D art, professional illustration, clean lines, vibrant colors, masterpiece, 4k'
   }
 };
 
@@ -176,6 +173,47 @@ const resetBtn = document.getElementById('resetBtn');
 const copyZhBtn = document.getElementById('copyZhBtn');
 const copyEnBtn = document.getElementById('copyEnBtn');
 
+// Language Toggle Implementation
+function initLanguageToggle() {
+  const langBtns = document.querySelectorAll('.lang-btn');
+  const savedLang = localStorage.getItem('character_gen_lang') || 'both';
+  
+  const setLanguage = (lang) => {
+    document.body.setAttribute('data-lang', lang);
+    langBtns.forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-lang-set') === lang);
+    });
+    localStorage.setItem('character_gen_lang', lang);
+
+    // Update Options and Placeholders
+    const translatableElements = document.querySelectorAll('[data-zh][data-en]');
+    translatableElements.forEach(el => {
+      const zh = el.getAttribute('data-zh');
+      const en = el.getAttribute('data-en');
+
+      if (el.tagName === 'OPTION') {
+        if (lang === 'zh') el.innerText = zh;
+        else if (lang === 'en') el.innerText = en;
+        else el.innerText = `${zh} (${en})`;
+      } else if (el.hasAttribute('placeholder')) {
+        if (lang === 'zh') el.placeholder = zh;
+        else if (lang === 'en') el.placeholder = en;
+        else el.placeholder = `${zh} / ${en}`;
+      }
+    });
+  };
+
+  langBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const selectedLang = btn.getAttribute('data-lang-set');
+      setLanguage(selectedLang);
+    });
+  });
+
+  // Initial set
+  setLanguage(savedLang);
+}
+
 // Field Synchronization & Logical Dependencies
 function syncFields() {
   const cup = document.getElementById('cup').value;
@@ -187,18 +225,35 @@ function syncFields() {
 
   // CUP vs Bust Details Logic
   const smallCups = ['A', 'B'];
-  const restrictedBustDetails = ['有明顯體積感', '深邃曲線', '動感起伏'];
   
-  Array.from(measureDetail.options).forEach(opt => {
-    if (smallCups.includes(cup) && restrictedBustDetails.includes(opt.value)) {
-      opt.disabled = true;
-      opt.hidden = true;
-      if (measureDetail.value === opt.value) measureDetail.value = '自然型態';
-    } else {
-      opt.disabled = false;
-      opt.hidden = false;
-    }
-  });
+  if (smallCups.includes(cup)) {
+    // For A-B, only "Natural Shape" is logically consistent
+    measureDetail.value = '自然型態';
+    Array.from(measureDetail.options).forEach(opt => {
+      if (opt.value !== '自然型態') {
+        opt.disabled = true;
+        opt.hidden = true;
+      } else {
+        opt.disabled = false;
+        opt.hidden = false;
+      }
+    });
+  } else {
+    // For C-H+, prioritize volume-related details
+    // If current value is "Natural Shape" (the fallback for small), change it to "Visible Volume"
+    if (measureDetail.value === '自然型態') measureDetail.value = '有明顯體積感';
+    
+    Array.from(measureDetail.options).forEach(opt => {
+      // For C-H+, only "Visible Volume" is available
+      if (opt.value === '有明顯體積感') {
+        opt.disabled = false;
+        opt.hidden = false;
+      } else {
+        opt.disabled = true;
+        opt.hidden = true;
+      }
+    });
+  }
 
   // Race vs Skin Color Logic
   const raceSkinMapping = {
@@ -239,15 +294,21 @@ function updatePrompt() {
   });
 
   // Combine Measurements
-  const measurementsZh = `${data.bust}${data.cup}-${data.waist}-${data.hip}${data.measureDetail ? '，' + data.measureDetail : ''}`;
+  const detailZh = data.measureDetail === '有明顯體積感' 
+    ? '上半身比例自然，胸部有明顯的體積與重量感，輪廓飽滿但不是刻意挺起，會隨著站姿與重力自然下垂，與整體身形保持平衡' 
+    : data.measureDetail;
+  
+  const measurementsZh = `${data.bust}${data.cup}-${data.waist}-${data.hip}${detailZh ? '，' + detailZh : ''}`;
   const measurementsEn = `${data.bust}${data.cup}-${data.waist}-${data.hip}${data.measureDetail ? ', ' + translate('measureDetail', data.measureDetail) : ''}`;
 
   // Construct Chinese Prompt
-  const styleDescriptionZh = data.charStyle === '真人角色' ? '真人角色（自然拍攝，可見毛孔）' : '動漫角色';
-  const zh = `製作一張三直排的人物設計參考圖（Character Sheet），主角是一位${data.race}，身高${data.height}cm，膚色${data.skinColor}，${data.bodyShape}但${measurementsZh}，（占總照片的左邊80%）包含同一個人的：正視圖、側視圖、後視圖（${data.hairStyle}），以及在（其餘20%）由上而下加入3張面部特寫（側面45度+微笑）（中性）（合眼）。臉部細節：${data.faceShape}，${data.headSize}，${data.chin}，${data.eyeShape}，${data.nose}，${data.mouth}，${data.eyebrows}。髮色：${data.hairColor}。服裝：${data.clothing}。純淨中性灰色攝影棚背景，均勻平鋪光影，${styleDescriptionZh}，極致細節，清晰對焦。 --ar ${data.aspectRatio}`;
+  const styleDescriptionZh = data.charStyle === '真人角色' ? '真人角色（自然拍攝，可見毛孔）' : '動漫角色風格';
+  const zh = `${styleDescriptionZh}，製作一張三直排的人物設計參考圖（Character Sheet），主角是一位${data.race}，身高${data.height}cm，膚色${data.skinColor}，${data.bodyShape}但${measurementsZh}，（占總照片的左邊80%）包含同一個人的：正視圖、側視圖、後視圖（${data.hairStyle}），以及在（其餘20%）由上而下加入3張面部特寫（側面45度+微笑）（中性）（合眼）。臉部細節：${data.faceShape}，${data.headSize}，${data.chin}	，${data.eyeShape}，${data.nose}，${data.mouth}，${data.eyebrows}。髮色：${data.hairColor}。服裝：${data.clothing}。純淨中性灰色攝影棚背景，均勻平鋪光影，極致細節，清晰對焦。 --ar ${data.aspectRatio}`;
 
   // Construct English Prompt for Gemini
-  const en = `A high-quality three-column character sheet for a character design reference. The main subject is a ${data.height}cm tall ${translate('race', data.race)} with ${translate('skinColor', data.skinColor)}. She has a ${translate('bodyShape', data.bodyShape)} with ${measurementsEn}. The image (80% of composition) features multiple perspectives of the same woman, including front, side, and back views (hair styled in a ${translate('hairStyle', data.hairStyle)}). The remaining 20% displays three detailed headshots ranging from a 45-degree profile to a smiling expression, all with a neutral, calm demeanor and closed eyes. Face details: ${translate('faceShape', data.faceShape)}, ${translate('headSize', data.headSize)}, ${translate('chin', data.chin)}, ${translate('eyeShape', data.eyeShape)}, ${translate('nose', data.nose)}, ${translate('mouth', data.mouth)}, and ${translate('eyebrows', data.eyebrows)}. Her hair color is ${translate('hairColor', data.hairColor)}. She is wearing ${translate('clothing', data.clothing)}. Set against a neutral grey studio background with soft, flat cinematic lighting. Style: ${translate('charStyle', data.charStyle)}. Extreme detail and sharp focus. The image should have a ${data.aspectRatio.replace(':', ' to ')} widescreen aspect ratio.`;
+  const styleDescriptionEn = translate('charStyle', data.charStyle);
+  const qualityTokens = data.charStyle === '真人角色' ? 'photorealistic, ultra-detailed, sharp focus, raw photography' : 'masterpiece, high quality illustration';
+  const en = `${styleDescriptionEn}. A high-quality three-column character sheet for a character design reference, ${qualityTokens}. The main subject is a ${data.height}cm tall ${translate('race', data.race)} with ${translate('skinColor', data.skinColor)}. She has a ${translate('bodyShape', data.bodyShape)} with ${measurementsEn}. The image (80% of composition) features multiple perspectives of the same woman, including front, side, and back views (hair styled in a ${translate('hairStyle', data.hairStyle)}). The remaining 20% displays three detailed headshots ranging from a 45-degree profile to a smiling expression, all with a neutral, calm demeanor and closed eyes. Face details: ${translate('faceShape', data.faceShape)}, ${translate('headSize', data.headSize)}, ${translate('chin', data.chin)}, ${translate('eyeShape', data.eyeShape)}, ${translate('nose', data.nose)}, ${translate('mouth', data.mouth)}, and ${translate('eyebrows', data.eyebrows)}. Her hair color is ${translate('hairColor', data.hairColor)}. She is wearing ${translate('clothing', data.clothing)}. Set against a neutral grey studio background with soft, flat cinematic lighting. The image should have a ${data.aspectRatio.replace(':', ' to ')} widescreen aspect ratio.`;
 
   promptZh.innerText = zh;
   promptEn.innerText = en;
@@ -316,4 +377,5 @@ copyZhBtn.addEventListener('click', () => copyToClipboard(promptZh.innerText, co
 copyEnBtn.addEventListener('click', () => copyToClipboard(promptEn.innerText, copyEnBtn));
 
 // Initialize
+initLanguageToggle();
 resetToDefault();
