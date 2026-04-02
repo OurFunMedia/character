@@ -253,8 +253,16 @@
             </div>
             <hr style="border: 0.5px solid var(--glass-border); margin: 1rem 0;">
 
-            <h2 class="section-title"><i data-lucide="square"></i> 畫面比例 / Aspect Ratio</h2>
+            <h2 class="section-title"><i data-lucide="palette"></i> 藝術風格 / Character Style</h2>
             <div class="group">
+                <select id="charStyle">
+                    <option value="真人角色" selected>真人角色 (Photorealistic / Visible Pores)</option>
+                    <option value="動漫角色">動漫角色 (Anime Style / 2D)</option>
+                </select>
+            </div>
+
+            <h2 class="section-title"><i data-lucide="square"></i> 畫面比例 / Aspect Ratio</h2>
+            <div class="group" style="margin-bottom: 1.5rem;">
                 <select id="aspectRatio">
                     <option value="3:2">3:2 (預設 - Character Sheet)</option>
                     <option value="16:9">16:9 (寬螢幕)</option>

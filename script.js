@@ -18,7 +18,8 @@ const defaults = {
   clothing: '二件式藍邊白色泳裝，布料貼合身形，側邊細繩，赤腳',
   aspectRatio: '3:2',
   race: '東亞少女',
-  skinColor: '暖白通透'
+  skinColor: '暖白通透',
+  charStyle: '真人角色'
 };
 
 const translations = {
@@ -145,6 +146,18 @@ const translations = {
     '橄欖色': 'olive complexion skin',
     '古銅色': 'glistening bronze skin tone',
     '深褐色': 'deep ebony charcoal skin'
+  },
+  measureDetail: {
+    '自然型態': 'natural shape',
+    '有明顯體積感': 'visible volume / full bust',
+    '挺拔有型': 'firm and perky shape',
+    '柔軟自然垂墜': 'soft and natural drooping',
+    '深邃曲線': 'deep defined cleavage',
+    '動感起伏': 'dynamic heaving'
+  },
+  charStyle: {
+    '真人角色': 'photorealistic style, natural look, visible pores, skin texture, cinematography, sharp focus',
+    '動漫角色': 'anime style, 2D art, high quality illustration, clean lines, vibrant colors'
   }
 };
 
@@ -230,10 +243,11 @@ function updatePrompt() {
   const measurementsEn = `${data.bust}${data.cup}-${data.waist}-${data.hip}${data.measureDetail ? ', ' + translate('measureDetail', data.measureDetail) : ''}`;
 
   // Construct Chinese Prompt
-  const zh = `製作一張三直排的人物設計參考圖（Character Sheet），主角是一位${data.race}，身高${data.height}cm，膚色${data.skinColor}，${data.bodyShape}但${measurementsZh}，（占總照片的左邊80%）包含同一個人的：正視圖、側視圖、後視圖（${data.hairStyle}），以及在（其餘20%）由上而下加入3張面部特寫（側面45度+微笑）（中性）（合眼）。臉部細節：${data.faceShape}，${data.headSize}，${data.chin}，${data.eyeShape}，${data.nose}，${data.mouth}，${data.eyebrows}。髮色：${data.hairColor}。服裝：${data.clothing}。純淨中性灰色攝影棚背景，均勻平鋪光影，寫實照片風格，極致細節，清晰對焦。 --ar ${data.aspectRatio}`;
+  const styleDescriptionZh = data.charStyle === '真人角色' ? '真人角色（自然拍攝，可見毛孔）' : '動漫角色';
+  const zh = `製作一張三直排的人物設計參考圖（Character Sheet），主角是一位${data.race}，身高${data.height}cm，膚色${data.skinColor}，${data.bodyShape}但${measurementsZh}，（占總照片的左邊80%）包含同一個人的：正視圖、側視圖、後視圖（${data.hairStyle}），以及在（其餘20%）由上而下加入3張面部特寫（側面45度+微笑）（中性）（合眼）。臉部細節：${data.faceShape}，${data.headSize}，${data.chin}，${data.eyeShape}，${data.nose}，${data.mouth}，${data.eyebrows}。髮色：${data.hairColor}。服裝：${data.clothing}。純淨中性灰色攝影棚背景，均勻平鋪光影，${styleDescriptionZh}，極致細節，清晰對焦。 --ar ${data.aspectRatio}`;
 
   // Construct English Prompt for Gemini
-  const en = `A high-quality three-column character sheet for a character design reference. The main subject is a ${data.height}cm tall ${translate('race', data.race)} with ${translate('skinColor', data.skinColor)}. She has a ${translate('bodyShape', data.bodyShape)} with ${measurementsEn}. The image (80% of composition) features multiple perspectives of the same woman, including front, side, and back views (hair styled in a ${translate('hairStyle', data.hairStyle)}). The remaining 20% displays three detailed headshots ranging from a 45-degree profile to a smiling expression, all with a neutral, calm demeanor and closed eyes. Face details: ${translate('faceShape', data.faceShape)}, ${translate('headSize', data.headSize)}, ${translate('chin', data.chin)}, ${translate('eyeShape', data.eyeShape)}, ${translate('nose', data.nose)}, ${translate('mouth', data.mouth)}, and ${translate('eyebrows', data.eyebrows)}. Her hair color is ${translate('hairColor', data.hairColor)}. She is wearing ${translate('clothing', data.clothing)}. Set against a neutral grey studio background with soft, flat cinematic lighting. Photorealistic style with extreme detail and sharp focus. The image should have a ${data.aspectRatio.replace(':', ' to ')} widescreen aspect ratio.`;
+  const en = `A high-quality three-column character sheet for a character design reference. The main subject is a ${data.height}cm tall ${translate('race', data.race)} with ${translate('skinColor', data.skinColor)}. She has a ${translate('bodyShape', data.bodyShape)} with ${measurementsEn}. The image (80% of composition) features multiple perspectives of the same woman, including front, side, and back views (hair styled in a ${translate('hairStyle', data.hairStyle)}). The remaining 20% displays three detailed headshots ranging from a 45-degree profile to a smiling expression, all with a neutral, calm demeanor and closed eyes. Face details: ${translate('faceShape', data.faceShape)}, ${translate('headSize', data.headSize)}, ${translate('chin', data.chin)}, ${translate('eyeShape', data.eyeShape)}, ${translate('nose', data.nose)}, ${translate('mouth', data.mouth)}, and ${translate('eyebrows', data.eyebrows)}. Her hair color is ${translate('hairColor', data.hairColor)}. She is wearing ${translate('clothing', data.clothing)}. Set against a neutral grey studio background with soft, flat cinematic lighting. Style: ${translate('charStyle', data.charStyle)}. Extreme detail and sharp focus. The image should have a ${data.aspectRatio.replace(':', ' to ')} widescreen aspect ratio.`;
 
   promptZh.innerText = zh;
   promptEn.innerText = en;
