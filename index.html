@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini 女性角色 Prompt 產生器 | Character Prompt Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo"><i data-lucide="sparkles"></i> Gemini 角色設計專家</div>
+        <h1>女性角色 Prompt 產生器</h1>
+        <p>專業級 Gemini 中英文雙語 Prompt 即時生成</p>
+    </header>
+
+    <div class="container">
+
+        <!-- Left Panel: Editor -->
+        <div class="glass input-section">
+            <h2 class="section-title"><i data-lucide="dna"></i> 角色 DNA 設定 / DNA Identity</h2>
+
+            <div class="grid-2">
+                <div class="group">
+                    <label for="race"><i data-lucide="users"></i> 種族 / Race</label>
+                    <select id="race">
+                        <option value="東亞少女">東亞 (East Asian)</option>
+                        <option value="高加索少女">高加索/歐美 (Caucasian)</option>
+                        <option value="歐亞混血少女">歐亞混血 (Eurasian)</option>
+                        <option value="東南亞少女">東南亞 (Southeast Asian)</option>
+                        <option value="南亞少女">南亞/印度 (South Asian)</option>
+                        <option value="拉丁少女">拉丁 (Hispanic/Latino)</option>
+                        <option value="中東少女">中東 (Middle Eastern)</option>
+                        <option value="非裔少女">非裔 (African/Black)</option>
+                    </select>
+                </div>
+                <div class="group">
+                    <label for="skinColor"><i data-lucide="palette"></i> 膚色 / Skin tone</label>
+                    <select id="skinColor">
+                        <option value="雪白通透">雪白 (Pale / Fair)</option>
+                        <option value="暖白通透" selected>自然暖白 (Natural Warm White)</option>
+                        <option value="象牙色">象牙色 (Ivory)</option>
+                        <option value="小麥色">小麥色 (Tanned)</option>
+                        <option value="橄欖色">橄欖色 (Olive)</option>
+                        <option value="古銅色">古銅色 (Bronze)</option>
+                        <option value="深褐色">深褐色 (Dark / Ebony)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- DNA: Head & Face -->
+            <div class="grid-2">
+                <div class="group">
+                    <label for="headSize"><i data-lucide="smile"></i> 頭部大小 / Head Size</label>
+                    <select id="headSize">
+                        <option value="精緻小巧" selected>精緻小巧 (Petit / Small Face)</option>
+                        <option value="標準比例">標準比例 (Proportioned / Standard)</option>
+                        <option value="略大生動">略大生動 (Slightly Large / Expressive)</option>
+                        <option value="細長瘦臉">細長瘦臉 (Narrow / Slender)</option>
+                    </select>
+                </div>
+                <div class="group">
+                    <label for="faceShape"><i data-lucide="circle"></i> 面形 / Face Shape</label>
+                    <select id="faceShape">
+                        <option value="闊圓臉" selected>圓潤闊圓臉 (Round / Plump)</option>
+                        <option value="鵝蛋臉">經典鵝蛋臉 (Oval / Classic)</option>
+                        <option value="瓜子臉">精緻瓜子臉 (V-shaped / Pointed)</option>
+                        <option value="心形臉">心形臉 (Heart-shaped)</option>
+                        <option value="稜角分明">稜角分明 (Square / Defined)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="group">
+                    <label for="chin"><i data-lucide="chevron-down"></i> 下巴 / Chin</label>
+                    <select id="chin">
+                        <option value="圓潤不尖" selected>圓潤不尖 (Round / Soft)</option>
+                        <option value="精緻V型">精緻 V 型 (Pointed / V-shaped)</option>
+                        <option value="略微後縮">略微後縮 (Recessed / Youthful)</option>
+                        <option value="結實有型">結實有型 (Defined / Firm)</option>
+                        <option value="柔和弧線">柔和弧線 (Softly Curved)</option>
+                    </select>
+                </div>
+                <div class="group">
+                    <label for="eyeShape"><i data-lucide="eye"></i> 眼 形狀 / Eye Shape</label>
+                    <select id="eyeShape">
+                        <option value="偏圓杏眼" selected>偏圓杏眼 (Almond-shaped)</option>
+                        <option value="丹鳳眼">丹鳳眼 (Phoenix eyes / Slanted)</option>
+                        <option value="圓眼">圓眼 (Round eyes)</option>
+                        <option value="細長眼">細長眼 (Slender / Narrow)</option>
+                        <option value="下垂眼">下垂眼 (Droopy / Downturned)</option>
+                        <option value="內雙">內雙 (Monolid)</option>
+                        <option value="外雙">外雙 (Double eyelid)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="group">
+                    <label for="nose"><i data-lucide="activity"></i> 鼻 / Nose</label>
+                    <select id="nose">
+                        <option value="鼻樑細直" selected>鼻樑細直 (Straight / Slim)</option>
+                        <option value="小巧圓潤">小巧圓潤 (Small & Round)</option>
+                        <option value="高挺秀氣">高挺秀氣 (High Bridge / Delicate)</option>
+                        <option value="鷹勾鼻">鷹勾鼻 (Hooked / Aquiline)</option>
+                        <option value="蒜頭鼻">蒜頭鼻 (Bulbous / Round Tip)</option>
+                        <option value="鼻翼寬">鼻翼寬 (Wide Nostrils)</option>
+                        <option value="鼻頭尖">鼻頭尖 (Pointed Tip)</option>
+                    </select>
+                </div>
+                <div class="group">
+                    <label for="mouth"><i data-lucide="music"></i> 口 / Mouth</label>
+                    <select id="mouth">
+                        <option value="櫻桃小嘴" selected>櫻桃小嘴 (Cherry Lips)</option>
+                        <option value="豐滿嘴唇">豐滿嘴唇 (Full Lips)</option>
+                        <option value="薄嘴唇">薄嘴唇 (Thin Lips)</option>
+                        <option value="嘴角上揚">嘴角上揚 (Upturned Corners)</option>
+                        <option value="嘴角下垂">嘴角下垂 (Downturned Corners)</option>
+                        <option value="寬大嘴巴">寬大嘴巴 (Wide Mouth)</option>
+                        <option value="M型唇">M 型唇 (Cupid's Bow)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="group">
+                    <label for="eyebrows"><i data-lucide="minus"></i> 眉毛 / Eyebrows</label>
+                    <select id="eyebrows">
+                        <option value="自然平直" selected>自然平直 (Natural Straight)</option>
+                        <option value="柳葉眉">柳葉眉 (Willow / Slender)</option>
+                        <option value="劍眉">劍眉 (Sword / Arched)</option>
+                        <option value="濃密眉">濃密眉 (Thick / Dense)</option>
+                        <option value="稀疏眉">稀疏眉 (Thin / Sparse)</option>
+                        <option value="高挑眉">高挑眉 (High Arched)</option>
+                        <option value="下垂眉">下垂眉 (Droopy)</option>
+                    </select>
+                </div>
+                <div class="group">
+                    <label for="hairStyle"><i data-lucide="wind"></i> 髮型 / Hair Style</label>
+                    <select id="hairStyle">
+                        <option value="長直髮">長直髮 (Long Straight Hair)</option>
+                        <option value="長捲髮">長捲髮 (Long Wavy/Curly Hair)</option>
+                        <option value="短髮">短髮 (Short Hair)</option>
+                        <option value="中長髮">中長髮 (Medium Length)</option>
+                        <option value="公主切">公主切 (Hime Cut)</option>
+                        <option value="丸子頭">丸子頭 (Bun)</option>
+                        <option value="雙馬尾">雙馬尾 (Twin Tails)</option>
+                        <option value="高馬尾" selected>高馬尾 (High Ponytail)</option>
+                        <option value="低馬尾">低馬尾 (Low Ponytail)</option>
+                        <option value="側邊馬尾">側邊馬尾 (Side Ponytail)</option>
+                        <option value="雙辮子">雙辮子 (Twin Braids)</option>
+                        <option value="單辮子">單辮子 (Single Braid)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="group">
+                <label for="hairColor"><i data-lucide="paint-bucket"></i> 髮色 / Hair Color</label>
+                <select id="hairColor">
+                    <option value="自然深黑">自然深黑 (Natural Black)</option>
+                    <option value="深棕色">深棕色 (Dark Brown)</option>
+                    <option value="淺棕混色" selected>淺棕混色 (Mixed Brown)</option>
+                    <option value="銀灰色">銀灰色 (Silver Gray)</option>
+                    <option value="金髮">金髮 (Blonde)</option>
+                    <option value="奶茶色">奶茶色 (Ash Blonde)</option>
+                    <option value="粉紫色">粉紫色 (Pastel Pink/Purple)</option>
+                    <option value="酒紅色">酒紅色 (Burgundy Red)</option>
+                </select>
+            </div>
+
+            <hr style="border: 0.5px solid var(--glass-border); margin: 1rem 0;">
+
+            <h2 class="section-title"><i data-lucide="user"></i> 身材與體態 / Body & Physique</h2>
+            <div class="grid-2">
+                <div class="group">
+                    <label for="height"><i data-lucide="ruler"></i> 身高 (cm) / Height</label>
+                    <input type="text" id="height" placeholder="例如：155">
+                </div>
+                <div class="group">
+                    <label for="bodyShape"><i data-lucide="user-round"></i> 身型描述 / Body Type</label>
+                    <select id="bodyShape">
+                        <option value="苗條勻稱" selected>苗條勻稱 (Slim & Proportioned)</option>
+                        <option value="嬌小纖瘦">嬌小纖瘦 (Petite & Slender)</option>
+                        <option value="精實有線條">精實有線條 (Athletic / Toned)</option>
+                        <option value="豐滿有致">豐滿有致 (Curvy / Hourglass)</option>
+                        <option value="圓潤豐腴">圓潤豐腴 (Soft / Plump)</option>
+                        <option value="高挑名模">高挑名模 (Tall / Model-like)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="group">
+                <label><i data-lucide="maximize-2"></i> 三圍數值 / Measurements</label>
+                <div class="grid-2" style="grid-template-columns: repeat(3, 1fr); gap: 0.5rem;">
+                    <input type="number" id="bust" placeholder="胸 Bust" value="34">
+                    <input type="number" id="waist" placeholder="腰 Waist" value="24">
+                    <input type="number" id="hip" placeholder="臀 Hip" value="32">
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="group">
+                    <label for="cup"><i data-lucide="gem"></i> 罩杯 / CUP</label>
+                    <select id="cup">
+                        <option value="A">A Cup</option>
+                        <option value="B">B Cup</option>
+                        <option value="C">C Cup</option>
+                        <option value="D">D Cup</option>
+                        <option value="E" selected>E Cup</option>
+                        <option value="F">F Cup</option>
+                        <option value="G">G Cup</option>
+                        <option value="H">H Cup+</option>
+                    </select>
+                </div>
+                <div class="group">
+                    <label for="measureDetail"><i data-lucide="plus-circle"></i> 胸部細節 / Bust Details</label>
+                    <select id="measureDetail">
+                        <option value="自然型態">自然型態 (Natural Shape)</option>
+                        <option value="有明顯體積感" selected>明顯體積感 (Visible Volume / Full)</option>
+                        <option value="挺拔有型">挺拔有型 (Firm & Perky)</option>
+                        <option value="柔軟自然垂墜">柔軟自然垂墜 (Soft / Natural Droop)</option>
+                        <option value="深邃曲線">深邃曲線 (Defined Cleavage)</option>
+                        <option value="動感起伏">動感起伏 (Dynamic Heaving)</option>
+                    </select>
+                </div>
+            </div>
+
+            <hr style="border: 0.5px solid var(--glass-border); margin: 1rem 0;">
+
+            <h2 class="section-title"><i data-lucide="shirt"></i> 服裝設定 / Clothing</h2>
+            <div class="group" style="margin-bottom: 0.5rem;">
+                <label for="clothingTemplate"><i data-lucide="layout"></i> 服裝模板 / Templates</label>
+                <select id="clothingTemplate">
+                    <option value="custom" selected>自定義 / Custom</option>
+                    <option value="swimsuit">二件式泳裝 (Swimsuit)</option>
+                    <option value="yoga">緊身瑜珈服 (Yoga Wear)</option>
+                    <option value="office">修身西裝 (Office Wear)</option>
+                    <option value="cheongsam">現代旗袍 (Modern Cheongsam)</option>
+                    <option value="armor">皮革輕甲 (Light Armor)</option>
+                    <option value="uniform">校園制服 (School Uniform)</option>
+                </select>
+            </div>
+            <div class="group">
+                <label for="clothing"><i data-lucide="edit-3"></i> 描述 / Description</label>
+                <textarea id="clothing" rows="3" placeholder="例如：二件式泳裝 / Two-piece swimwear"></textarea>
+            </div>
+            <hr style="border: 0.5px solid var(--glass-border); margin: 1rem 0;">
+
+            <h2 class="section-title"><i data-lucide="square"></i> 畫面比例 / Aspect Ratio</h2>
+            <div class="group">
+                <select id="aspectRatio">
+                    <option value="3:2">3:2 (預設 - Character Sheet)</option>
+                    <option value="16:9">16:9 (寬螢幕)</option>
+                    <option value="4:3">4:3 (標準)</option>
+                    <option value="1:1">1:1 (正方形)</option>
+                </select>
+            </div>
+
+            <div class="actions">
+                <button id="resetBtn" class="btn-secondary btn-reset"><i data-lucide="refresh-cw"></i> 恢復預設 /
+                    Reset</button>
+            </div>
+        </div>
+
+        <!-- Right Panel: Output -->
+        <div class="output-area">
+            <div class="glass">
+                <h2 class="section-title"><i data-lucide="image"></i> 成品示範 / Sample Artwork</h2>
+                <div class="portrait-preview">
+                    <img src="character_portrait.jpg" alt="Character Preview">
+                </div>
+
+                <div class="prompt-box">
+                    <h3>Generated Prompt (Traditional Chinese / 中文)</h3>
+                    <div id="promptZh" class="prompt-text">正在生成...</div>
+                </div>
+
+                <div class="prompt-box" style="margin-top: 1rem;">
+                    <h3>Generated Prompt (English / 英文)</h3>
+                    <div id="promptEn" class="prompt-text">Generating...</div>
+                </div>
+
+                <div class="actions">
+                    <button id="copyZhBtn" class="btn-secondary"><i data-lucide="copy"></i> 複製中文 / Copy ZH</button>
+                    <button id="copyEnBtn" class="btn-primary"><i data-lucide="clipboard"></i> 複製英文 / Copy EN</button>
+                </div>
+            </div>
+
+            <div class="glass" style="margin-top: 1.5rem; padding: 1.5rem;">
+                <h3
+                    style="font-size: 0.8rem; color: var(--accent-color); margin-bottom: 0.5rem; text-transform: uppercase; font-weight: 700;">
+                    使用提示 / Usage Tips</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+                    • 點擊按鈕複製指令到 Gemini 對話框 / Copy to Gemini Chat.<br>
+                    • 調整 DNA 數值即時更新指令 / Real-time DNA updates.<br>
+                    • 已針對 Gemini 高級版本進行提示詞優化 / Optimized for Gemini Pro.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
