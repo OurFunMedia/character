@@ -97,7 +97,7 @@ h2.section-title {
   letter-spacing: 0.025em;
 }
 
-h2.section-title i {
+h2.section-title i, h2.section-title svg {
   width: 20px;
   height: 20px;
 }
@@ -123,7 +123,7 @@ label {
   gap: 0.5rem;
 }
 
-label i {
+label i, label svg {
   width: 14px;
   height: 14px;
   opacity: 0.7;
@@ -347,7 +347,14 @@ body[data-lang="both"] .lang-sep {
   transform: translateY(-2px);
 }
 
-.footer i {
+.footer i, .footer svg {
   width: 18px;
   height: 18px;
+  transition: all 0.2s ease;
 }
+
+.facebook-link:hover i, .facebook-link:hover svg {
+  color: #1877f2;
+  transform: scale(1.2);
+}
+
