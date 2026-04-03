@@ -8,15 +8,13 @@ const defaults = {
   eyebrows: '自然平直',
   hairStyle: '高馬尾',
   hairColor: '淺棕混色',
-  height: '155',
+  height: '165',
   bodyShape: '苗條勻稱',
-  bust: '34',
-  waist: '24',
-  hip: '32',
-  cup: 'E',
-  measureDetail: '有明顯體積感',
-  clothing: '二件式藍邊白色泳裝，布料貼合身形，側邊細繩，赤腳',
-  clothingTemplate: 'swimsuit',
+  bustSize: 'L',
+  waistSize: 'S',
+  hipSize: 'M',
+  clothing: '二件式深V吊帶藍邊白色露腰瑜伽套裝，布料貼合身形，側邊排汗網格，展現腰臀比，赤腳',
+  clothingTemplate: 'yoga',
   aspectRatio: '3:2',
   race: '東亞少女',
   skinColor: '暖白通透',
@@ -25,27 +23,27 @@ const defaults = {
 };
 
 const translations = {
-  headSize: { 
+  headSize: {
     '精緻小巧': 'small petite face, refined head proportions',
     '標準比例': 'naturally proportioned head and body',
     '略大生動': 'expressive slightly larger face',
     '細長瘦臉': 'narrow slender face silhouette'
   },
-  faceShape: { 
+  faceShape: {
     '闊圓臉': 'soft round wide face',
     '鵝蛋臉': 'classic symmetric oval face',
     '瓜子臉': 'pointed V-shaped thin face',
     '心形臉': 'heart-shaped face, pointed chin',
     '稜角分明': 'square defined jawline and face'
   },
-  chin: { 
+  chin: {
     '圓潤不尖': 'soft rounded chin silhouette',
     '精緻V型': 'sharp delicate V-line chin',
     '略微後縮': 'recessed youthful chin profile',
     '結實有型': 'firm well-defined prominent chin',
     '柔和弧線': 'gracefully curved soft chin'
   },
-  eyeShape: { 
+  eyeShape: {
     '偏圓杏眼': 'almond-shaped eyes',
     '丹鳳眼': 'slanted phoenix eyes',
     '圓眼': 'large round expressive eyes',
@@ -54,7 +52,7 @@ const translations = {
     '內雙': 'inner double eyelids',
     '外雙': 'distinct double eyelids'
   },
-  nose: { 
+  nose: {
     '鼻樑細直': 'straight slim nose bridge',
     '小巧圓潤': 'small rounded cute nose',
     '高挺秀氣': 'high elegant nose bridge',
@@ -63,16 +61,16 @@ const translations = {
     '寬鼻翼': 'wide nostrils',
     '尖鼻頭': 'pointed nose tip'
   },
-  mouth: { 
+  mouth: {
     '櫻桃小嘴': 'delicate cherry lips',
-    '豐滿嘴唇': 'full luscious lips',
+    '豐滿嘴唇': 'refined and expressive lip shape',
     '薄嘴唇': 'thin refined lips',
     '嘴角上揚': 'naturally upturned mouth corners',
     '嘴角下垂': 'downturned mouth corners',
     '寬大嘴巴': 'wide expressive mouth',
     'M型唇': 'perfect M-shaped cupid\'s bow lips'
   },
-  eyebrows: { 
+  eyebrows: {
     '自然平直': 'natural straight eyebrows',
     '柳葉眉': 'slender willow-leaf eyebrows',
     '劍眉': 'sharp arched sword eyebrows',
@@ -81,7 +79,7 @@ const translations = {
     '高挑眉': 'high arched eyebrows',
     '下垂眉': 'droopy sad eyebrows'
   },
-  hairStyle: { 
+  hairStyle: {
     '長直髮': 'long straight flowing hair',
     '長捲髮': 'long wavy curly hair',
     '短髮': 'short bob hair',
@@ -95,7 +93,7 @@ const translations = {
     '雙辮子': 'twin braids',
     '單辮子': 'single braid'
   },
-  hairColor: { 
+  hairColor: {
     '自然深黑': 'natural deep black hair',
     '深棕色': 'elegant dark brown hair',
     '淺棕混色': 'mixed light and dark brown hair',
@@ -113,24 +111,53 @@ const translations = {
     '極光漸層': 'fantasy aurora gradient hair'
   },
   height: { '155': '155cm height' },
-  bodyShape: { 
-    '苗條勻稱': 'slim and well-proportioned',
+  bodyShape: {
+    '苗條勻稱': 'well-proportioned yet slender silhouette with a fit build',
     '嬌小纖瘦': 'petite and slender silhouette',
     '精實有線條': 'athletic and toned physique with defined lines',
-    '豐滿有致': 'curvy and sensual hourglass figure',
+    '豐滿有致': 'stunning fit physique with a gracefully developed profile and very slim waist',
     '圓潤豐腴': 'soft and plump aesthetic',
     '高挑名模': 'tall model-like proportions with long legs'
   },
-  measurements: { '34E-24-32，胸部有明顯體積感': '34E-24-32 measurements, full bust' },
-  clothing: { 
-    '二件式藍邊白色泳裝，布料貼合身形，側邊細繩，赤腳': 'two-piece blue-trimmed white swimsuit, side-string bottom, barefoot',
-    '緊身灰色瑜珈服，高腰設計，側邊排汗網格，展現腰臀比': 'tight grey yoga wear, high-waist, side mesh panels, emphasizing waist-to-hip ratio',
-    '修身深藍西裝外套，開襟合身，內搭白色蕾絲襯衫，黑色窄裙': 'slim-fit navy blazer, open front, white lace shirt, black pencil skirt',
-    '現代短版旗袍，淡粉色綢緞材質，精細刺繡花紋，側邊高開衩': 'modern short qipao cheongsam, light pink satin, intricate floral embroidery, side high slit',
-    '皮革與金屬混合的輕型戰鬥護甲，黑色主體與金邊，具備機械感細節': 'light combat armor, leather and metal, black with gold trim, mechanical details',
-    '經典水手服風格制服，深藍色短裙與白襯衫，配有紅色蝴蝶結，及膝長襪': 'classic sailor style school uniform, navy pleated skirt, white shirt with red bow tie, knee-high socks'
+  bustSize: {
+    'S': '精緻小巧且比例自然',
+    'M': '勻稱飽滿且線條柔美',
+    'L': '豐滿傲人，伴隨明顯的重量與體積感'
   },
-  race: { 
+  waistSize: {
+    'S': '纖細緊緻的曼妙腰線',
+    'M': '標準比例的健康腰身',
+    'L': '圓潤健康的自然腰廊'
+  },
+  hipSize: {
+    'S': '窄瘦苗條的骨感臀部',
+    'M': '勻稱有型且結實的臀部',
+    'L': '圓潤飽滿且挺括的臀部'
+  },
+  bustSizeEn: {
+    'S': 'natural and petite upper silhouette',
+    'M': 'perfectly proportioned and balanced upper silhouette',
+    'L': 'exceptionally developed and impactful upper frame with distinct natural proportions'
+  },
+  waistSizeEn: {
+    'S': 'an extremely slim and cinched waistline',
+    'M': 'a standard and healthy waist',
+    'L': 'a soft and naturally healthy waist profile'
+  },
+  hipSizeEn: {
+    'S': 'slim and narrow hips',
+    'M': 'well-shaped and firm hips',
+    'L': 'full and prominently curvy hips'
+  },
+  clothing: {
+
+    '二件式深V吊帶藍邊白色露腰瑜伽套裝，布料貼合身形，側邊排汗網格，展現腰臀比，赤腳': 'two-piece elegant neckline yoga set, white with blue trim, fit waistline, form-fitting fabric with breathable side mesh panels, accentuating balanced feminine proportions, barefoot',
+    '修身深藍西裝外套，開襟合身，內搭白色蕾絲襯衫，黑色窄裙': 'slim-fit navy blazer, open front, white lace shirt, black pencil skirt',
+    '現代短版旗袍，淡粉色綢緞材質，精細刺繡花紋，側邊高開衩': 'modern short qipao cheongsam, light pink satin, intricate floral embroidery, elegant side slit',
+    '皮革與金屬混合的輕型戰鬥護甲，黑色主體與金邊，具備機械感細節': 'light combat armor, leather and metal, black with gold trim, mechanical details',
+    '經典水手服風格制服，深藍色短裙與白襯衫，配有紅色蝴蝶結, long socks': 'classic sailor style school uniform, navy pleated skirt, white shirt with red bow tie, long socks'
+  },
+  race: {
     '東亞少女': 'East Asian girl',
     '高加索少女': 'Western Caucasian girl',
     '歐亞混血少女': 'Eurasian mixed girl',
@@ -148,7 +175,7 @@ const translations = {
     '30歲左右': 'around 30 years old',
     '成熟': 'mature'
   },
-  skinColor: { 
+  skinColor: {
     '雪白通透': 'porcelain snow white transparent skin',
     '暖白通透': 'warm white, transparent glowing skin',
     '象牙色': 'delicate ivory skin tone',
@@ -159,10 +186,10 @@ const translations = {
   },
   measureDetail: {
     '自然型態': 'natural shape',
-    '有明顯體積感': 'naturally proportioned upper body where the bust has a perceptible sense of volume and weight, featuring full contours that respond organically to posture and gravity with a balanced drape that harmonizes with the overall physique'
+    '有明顯體積感': 'exceptionally developed silhouette that maintains a natural profile and realistic physical presence'
   },
   charStyle: {
-    '真人角色': 'Ultra-realistic raw photo, hyper-detailed skin texture, visible pores, subsurface scattering, natural look, shot on 85mm lens, f/1.8, cinematic lighting, 8k UHD, masterpiece, highly detailed',
+    '真人角色': 'Professional RAW portrait photo, shot on Sony A7R IV, 85mm lens, f/8, hyper-detailed texture, natural skin, sub-surface scattering, cinematic studio lighting, 8k UHD, incredibly photorealistic',
     '動漫角色': 'high quality anime style, 2D art, professional illustration, clean lines, vibrant colors, masterpiece, 4k'
   }
 };
@@ -172,7 +199,7 @@ function translate(key, value) {
   if (translations[key] && translations[key][value]) {
     return translations[key][value];
   }
-  return value; 
+  return value;
 }
 
 const inputs = document.querySelectorAll('input, textarea, select');
@@ -186,7 +213,7 @@ const copyEnBtn = document.getElementById('copyEnBtn');
 function initLanguageToggle() {
   const langBtns = document.querySelectorAll('.lang-btn');
   const savedLang = localStorage.getItem('character_gen_lang') || 'both';
-  
+
   const setLanguage = (lang) => {
     document.body.setAttribute('data-lang', lang);
     langBtns.forEach(btn => {
@@ -225,44 +252,10 @@ function initLanguageToggle() {
 
 // Field Synchronization & Logical Dependencies
 function syncFields() {
-  const cup = document.getElementById('cup').value;
   const race = document.getElementById('race').value;
-  const measureDetail = document.getElementById('measureDetail');
   const skinColor = document.getElementById('skinColor');
 
-  if (!measureDetail || !skinColor) return;
-
-  // CUP vs Bust Details Logic
-  const smallCups = ['A', 'B'];
-  
-  if (smallCups.includes(cup)) {
-    // For A-B, only "Natural Shape" is logically consistent
-    measureDetail.value = '自然型態';
-    Array.from(measureDetail.options).forEach(opt => {
-      if (opt.value !== '自然型態') {
-        opt.disabled = true;
-        opt.hidden = true;
-      } else {
-        opt.disabled = false;
-        opt.hidden = false;
-      }
-    });
-  } else {
-    // For C-H+, prioritize volume-related details
-    // If current value is "Natural Shape" (the fallback for small), change it to "Visible Volume"
-    if (measureDetail.value === '自然型態') measureDetail.value = '有明顯體積感';
-    
-    Array.from(measureDetail.options).forEach(opt => {
-      // For C-H+, only "Visible Volume" is available
-      if (opt.value === '有明顯體積感') {
-        opt.disabled = false;
-        opt.hidden = false;
-      } else {
-        opt.disabled = true;
-        opt.hidden = true;
-      }
-    });
-  }
+  if (!skinColor) return;
 
   // Race vs Skin Color Logic
   const raceSkinMapping = {
@@ -302,22 +295,50 @@ function updatePrompt() {
     data[input.id] = input.value || defaults[input.id];
   });
 
-  // Combine Measurements
-  const detailZh = data.measureDetail === '有明顯體積感' 
-    ? '上半身比例自然，胸部有明顯的體積與重量感，輪廓飽滿但不是刻意挺起，會隨著站姿與重力自然下垂，與整體身形保持平衡' 
-    : data.measureDetail;
-  
-  const measurementsZh = `${data.bust}${data.cup}-${data.waist}-${data.hip}${detailZh ? '，' + detailZh : ''}`;
-  const measurementsEn = `${data.bust}${data.cup}-${data.waist}-${data.hip}${data.measureDetail ? ', ' + translate('measureDetail', data.measureDetail) : ''}`;
+  // Handle conditional body shape description for BustSize L (equivalent to Cup >= C)
+  const isLargeL = data.bustSize === 'L';
+  let bodyShapeZh = data.bodyShape;
+  let bodyShapeEn = translate('bodyShape', data.bodyShape);
+
+  if (isLargeL) {
+    const connectors = {
+      '苗條勻稱': '但',
+      '嬌小纖瘦': '但',
+      '精實有線條': '及',
+      '豐滿有致': '及',
+      '圓潤豐腴': '及',
+      '高挑名模': '及'
+    };
+    const connector = connectors[data.bodyShape] || '及';
+    bodyShapeZh = `豐滿上圍 ${connector} ${data.bodyShape}`;
+
+    // English: Profile priority
+    const enDescriptions = {
+      '苗條勻稱': 'gracefully developed silhouette contrasted with a naturally slim and well-proportioned',
+      '嬌小纖瘦': 'graceful curves on a petite and slender',
+      '精實有線條': 'exceptionally developed silhouette combined with an athletic, toned',
+      '豐滿有致': 'stunningly developed silhouette and a curvy hourglass',
+      '圓潤豐腴': 'graceful curves and a soft, plump',
+      '高挑名模': 'graceful curves and tall, model-like'
+    };
+    bodyShapeEn = (enDescriptions[data.bodyShape] || 'graceful curves and') + ' physique';
+  }
+
+  // Measurements construction (S/M/L)
+  const measurementsZh = `${translate('bustSize', data.bustSize)}、${translate('waistSize', data.waistSize)}、以及${translate('hipSize', data.hipSize)}`;
+  const measurementsEn = `${translate('bustSizeEn', data.bustSize)}, ${translate('waistSizeEn', data.waistSize)}, and ${translate('hipSizeEn', data.hipSize)}`;
 
   // Construct Chinese Prompt
-  const styleDescriptionZh = data.charStyle === '真人角色' ? '真人角色（自然拍攝，可見毛孔）' : '動漫角色風格';
-  const zh = `${styleDescriptionZh}，製作一張三直排的人物設計參考圖（Character Sheet），主角是一位${data.age}的${data.race}，身高${data.height}cm，膚色${data.skinColor}，${data.bodyShape}但${measurementsZh}，（占總照片的左邊80%）包含同一個人的：正視圖、側視圖、後視圖（${data.hairStyle}），以及在（其餘20%）由上而下加入3張面部特寫（側面45度+微笑）（中性）（合眼）。臉部細節：${data.faceShape}，${data.headSize}，${data.chin}	，${data.eyeShape}，${data.nose}，${data.mouth}，${data.eyebrows}。髮色：${data.hairColor}。服裝：${data.clothing}。純淨中性灰色攝影棚背景，均勻平鋪光影，極致細節，清晰對焦。 --ar ${data.aspectRatio}`;
+  const styleDescriptionZh = data.charStyle === '真人角色' ? '真人角色（自然拍攝，可見毛孔，鏡頭：85mm f/8）' : '動漫角色風格';
+  const zh = `${styleDescriptionZh}，製作一張三直排的人物設計參考圖（Character Sheet），主角是一位${data.age}的${data.race}，身高${data.height}cm，膚色${data.skinColor}，${bodyShapeZh}，${measurementsZh}，（占總照片的左邊80%）包含同一個人的：正視圖、側視圖、後視圖（${data.hairStyle}），以及在（其餘20%）由上而下加入3張面部特寫（側面45度+微笑）（中性）（合眼）。臉部細節：${data.faceShape}，${data.headSize}，${data.chin}，${data.eyeShape}，${data.nose}，${data.mouth}，${data.eyebrows}，清透自然的淡妝，水潤亮澤的雙唇。髮色：${data.hairColor}。服裝：${data.clothing}。純淨中性灰色攝影棚背景，均勻平鋪光影，極致細節，清晰對焦。 --ar ${data.aspectRatio}`;
 
   // Construct English Prompt for Gemini
+  const isPhoto = data.charStyle === '真人角色';
   const styleDescriptionEn = translate('charStyle', data.charStyle);
-  const qualityTokens = data.charStyle === '真人角色' ? 'photorealistic, ultra-detailed, sharp focus, raw photography' : 'masterpiece, high quality illustration';
-  const en = `${styleDescriptionEn}. A high-quality three-column character sheet for a character design reference, ${qualityTokens}. The main subject is a ${data.height}cm tall ${translate('race', data.race)} (${translate('age', data.age)}) with ${translate('skinColor', data.skinColor)}. She has a ${translate('bodyShape', data.bodyShape)} with ${measurementsEn}. The image (80% of composition) features multiple perspectives of the same woman, including front, side, and back views (hair styled in a ${translate('hairStyle', data.hairStyle)}). The remaining 20% displays three detailed headshots ranging from a 45-degree profile to a smiling expression, all with a neutral, calm demeanor and closed eyes. Face details: ${translate('faceShape', data.faceShape)}, ${translate('headSize', data.headSize)}, ${translate('chin', data.chin)}, ${translate('eyeShape', data.eyeShape)}, ${translate('nose', data.nose)}, ${translate('mouth', data.mouth)}, and ${translate('eyebrows', data.eyebrows)}. Her hair color is ${translate('hairColor', data.hairColor)}. She is wearing ${translate('clothing', data.clothing)}. Set against a neutral grey studio background with soft, flat cinematic lighting. The image should have a ${data.aspectRatio.replace(':', ' to ')} widescreen aspect ratio.`;
+  const sheetTypeEn = isPhoto ? 'Professional studio photography character study' : 'High-quality three-column character sheet';
+  const qualityTokensEn = isPhoto ? 'commercial photography, highly detailed, sharp focus, deep depth of field, raw photography' : 'masterpiece, high quality illustration, clean lines';
+
+  const en = `${styleDescriptionEn}. A ${sheetTypeEn} for a character design reference, ${qualityTokensEn}. The main subject is a ${data.height}cm tall ${translate('race', data.race)} (${translate('age', data.age)}) with ${translate('skinColor', data.skinColor)}. She has a ${bodyShapeEn} with ${measurementsEn}. The image (80% of composition) features multiple perspectives of the same woman, including front, side, and back views (hair styled in a ${translate('hairStyle', data.hairStyle)}). The remaining 20% displays three detailed headshots ranging from a 45-degree profile to a smiling expression, all with a neutral, calm demeanor and closed eyes. Face details: ${translate('faceShape', data.faceShape)}, ${translate('headSize', data.headSize)}, ${translate('chin', data.chin)}, ${translate('eyeShape', data.eyeShape)}, ${translate('nose', data.nose)}, ${translate('mouth', data.mouth)}, and ${translate('eyebrows', data.eyebrows)}, with clear and natural light makeup and moist glossy lips. Her hair color is ${translate('hairColor', data.hairColor)}. She is wearing ${translate('clothing', data.clothing)}. Set against a neutral grey studio background with soft, flat cinematic lighting. The image should have a ${data.aspectRatio.replace(':', ' to ')} widescreen aspect ratio.`;
 
   promptZh.innerText = zh;
   promptEn.innerText = en;
@@ -336,7 +357,7 @@ async function copyToClipboard(text, btn) {
     await navigator.clipboard.writeText(text);
     const originalContent = btn.innerHTML;
     const isPrimary = btn.classList.contains('btn-primary');
-    
+
     btn.innerHTML = `<i data-lucide="check"></i> 已複製 / Copied!`;
     btn.style.background = 'var(--success)';
     btn.style.color = '#fff';
@@ -354,8 +375,8 @@ async function copyToClipboard(text, btn) {
 }
 
 const clothingTemplates = {
-  'swimsuit': '二件式藍邊白色泳裝，布料貼合身形，側邊細繩，赤腳',
-  'yoga': '緊身灰色瑜珈服，高腰設計，側邊排汗網格，展現腰臀比',
+
+  'yoga': '二件式深V吊帶藍邊白色露腰瑜伽套裝，布料貼合身形，側邊排汗網格，展現腰臀比，赤腳',
   'office': '修身深藍西裝外套，開襟合身，內搭白色蕾絲襯衫，黑色窄裙',
   'cheongsam': '現代短版旗袍，淡粉色綢緞材質，精細刺繡花紋，側邊高開衩',
   'armor': '皮革與金屬混合的輕型戰鬥護甲，黑色主體與金邊，具備機械感細節',

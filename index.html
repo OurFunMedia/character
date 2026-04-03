@@ -223,7 +223,7 @@
                 <div class="group">
                     <label for="height"><i data-lucide="ruler"></i> <span class="lang-zh">身高 (cm)</span><span
                             class="lang-sep"> / </span><span class="lang-en">Height</span></label>
-                    <input type="text" id="height" data-zh="例如：155" data-en="e.g. 155" placeholder="例如：155">
+                    <input type="text" id="height" data-zh="例如：155" data-en="e.g. 155" placeholder="例如：155" value="165">
                 </div>
                 <div class="group">
                     <label for="bodyShape"><i data-lucide="user-round"></i> <span class="lang-zh">身型描述</span><span
@@ -239,39 +239,29 @@
                 </div>
             </div>
 
-            <div class="group">
-                <label style="justify-content: center; margin-bottom: 0.25rem;">
-                    <i data-lucide="maximize-2"></i> 
-                    <span class="lang-zh">三圍數值</span><span class="lang-sep"> / </span><span class="lang-en">Measurements</span>
-                </label>
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
-                    <input type="number" id="bust" data-zh="胸" data-en="Bust" placeholder="胸 Bust" value="34">
-                    <input type="number" id="waist" data-zh="腰" data-en="Waist" placeholder="腰 Waist" value="24">
-                    <input type="number" id="hip" data-zh="臀" data-en="Hip" placeholder="臀 Hip" value="32">
-                </div>
-            </div>
-
-            <div class="grid-2">
+            <div class="grid-3">
                 <div class="group">
-                    <label for="cup"><i data-lucide="gem"></i> <span class="lang-zh">罩杯</span><span class="lang-sep"> /
-                        </span><span class="lang-en">CUP</span></label>
-                    <select id="cup">
-                        <option value="A" data-zh="A Cup" data-en="A Cup">A Cup</option>
-                        <option value="B" data-zh="B Cup" data-en="B Cup">B Cup</option>
-                        <option value="C" data-zh="C Cup" data-en="C Cup" selected>C Cup</option>
-                        <option value="D" data-zh="D Cup" data-en="D Cup">D Cup</option>
-                        <option value="E" data-zh="E Cup" data-en="E Cup">E Cup</option>
-                        <option value="F" data-zh="F Cup" data-en="F Cup">F Cup</option>
-                        <option value="G" data-zh="G Cup" data-en="G Cup">G Cup</option>
-                        <option value="H" data-zh="H Cup+" data-en="H Cup+">H Cup+</option>
+                    <label for="bustSize"><i data-lucide="gem"></i> <span class="lang-zh">上圍 (胸)</span><span class="lang-sep"> / </span><span class="lang-en">Bust</span></label>
+                    <select id="bustSize">
+                        <option value="S" data-zh="精緻自然 (S)" data-en="Natural (S)">精緻自然 (S)</option>
+                        <option value="M" data-zh="勻稱飽滿 (M)" data-en="Proportioned (M)">勻稱飽滿 (M)</option>
+                        <option value="L" data-zh="豐滿傲人 (L)" data-en="Developed (L)" selected>豐滿傲人 (L)</option>
                     </select>
                 </div>
                 <div class="group">
-                    <label for="measureDetail"><i data-lucide="plus-circle"></i> <span class="lang-zh">胸部細節</span><span
-                            class="lang-sep"> / </span><span class="lang-en">Bust Details</span></label>
-                    <select id="measureDetail">
-                        <option value="自然型態" data-zh="自然型態" data-en="Natural Shape">自然型態 (Natural Shape)</option>
-                        <option value="有明顯體積感" data-zh="明顯體積感" data-en="Visible Volume / Full" selected>明顯體積感 (Visible Volume / Full)</option>
+                    <label for="waistSize"><i data-lucide="scissors"></i> <span class="lang-zh">中圍 (腰)</span><span class="lang-sep"> / </span><span class="lang-en">Waist</span></label>
+                    <select id="waistSize">
+                        <option value="S" data-zh="纖細緊緻 (S)" data-en="Slim (S)" selected>纖細緊緻 (S)</option>
+                        <option value="M" data-zh="標準比例 (M)" data-en="Standard (M)">標準比例 (M)</option>
+                        <option value="L" data-zh="圓潤健康 (L)" data-en="Healthy (L)">圓潤健康 (L)</option>
+                    </select>
+                </div>
+                <div class="group">
+                    <label for="hipSize"><i data-lucide="maximize-2"></i> <span class="lang-zh">下圍 (臀)</span><span class="lang-sep"> / </span><span class="lang-en">Hip</span></label>
+                    <select id="hipSize">
+                        <option value="S" data-zh="窄瘦苗條 (S)" data-en="Narrow (S)">窄瘦苗條 (S)</option>
+                        <option value="M" data-zh="勻稱有型 (M)" data-en="Well-shaped (M)" selected>勻稱有型 (M)</option>
+                        <option value="L" data-zh="圓潤飽滿 (L)" data-en="Full (L)">圓潤飽滿 (L)</option>
                     </select>
                 </div>
             </div>
@@ -285,8 +275,8 @@
                         class="lang-sep"> / </span><span class="lang-en">Templates</span></label>
                 <select id="clothingTemplate">
                     <option value="custom" data-zh="自定義" data-en="Custom">自定義 / Custom</option>
-                    <option value="swimsuit" data-zh="二件式泳裝" data-en="Swimsuit" selected>二件式泳裝 (Swimsuit)</option>
-                    <option value="yoga" data-zh="緊身瑜珈服" data-en="Yoga Wear">緊身瑜珈服 (Yoga Wear)</option>
+
+                    <option value="yoga" data-zh="緊身瑜珈服" data-en="Yoga Wear" selected>緊身瑜珈服 (Yoga Wear)</option>
                     <option value="office" data-zh="修身西裝" data-en="Office Wear">修身西裝 (Office Wear)</option>
                     <option value="cheongsam" data-zh="現代旗袍" data-en="Modern Cheongsam">現代旗袍 (Modern Cheongsam)</option>
                     <option value="armor" data-zh="皮革輕甲" data-en="Light Armor">皮革輕甲 (Light Armor)</option>
@@ -304,7 +294,7 @@
                     class="lang-sep"> / </span><span class="lang-en">Character Style</span></h2>
             <div class="group">
                 <select id="charStyle">
-                    <option value="真人角色" data-zh="真人角色" data-en="Photorealistic" selected>真人角色 (Photorealistic / Visible Pores)</option>
+                    <option value="真人角色" data-zh="真人角色" data-en="Photorealistic" selected>真人角色 (Photorealistic)</option>
                     <option value="動漫角色" data-zh="動漫角色" data-en="Anime Style">動漫角色 (Anime Style / 2D)</option>
                 </select>
             </div>
