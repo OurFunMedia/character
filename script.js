@@ -189,7 +189,7 @@ const translations = {
     '有明顯體積感': 'exceptionally developed silhouette that maintains a natural profile and realistic physical presence'
   },
   charStyle: {
-    '真人角色': 'Professional RAW portrait photo, shot on Sony A7R IV, 85mm lens, f/8, hyper-detailed texture, natural skin, sub-surface scattering, cinematic studio lighting, 8k UHD, incredibly photorealistic',
+    '真人角色': 'Professional RAW portrait photo, shot on Canon R5, 85mm lens, f/8, hyper-detailed texture, natural skin, sub-surface scattering, cinematic studio lighting, 8k UHD, incredibly photorealistic',
     '動漫角色': 'high quality anime style, 2D art, professional illustration, clean lines, vibrant colors, masterpiece, 4k'
   }
 };
