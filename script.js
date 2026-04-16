@@ -19,7 +19,8 @@ const defaults = {
   race: '東亞少女',
   skinColor: '暖白通透',
   charStyle: '真人角色',
-  age: '20歲初'
+  age: '20歲初',
+  makeup: '淡妝'
 };
 
 const translations = {
@@ -191,6 +192,14 @@ const translations = {
   charStyle: {
     '真人角色': 'Professional RAW portrait photo, shot on Canon R5, 85mm lens, f/8, hyper-detailed texture, natural skin, sub-surface scattering, cinematic studio lighting, 8k UHD, incredibly photorealistic',
     '動漫角色': 'high quality anime style, 2D art, professional illustration, clean lines, vibrant colors, masterpiece, 4k'
+  },
+  makeup: {
+    '淡妝': '清透自然的淡妝，水潤亮澤的雙唇',
+    '全妝': '精緻華麗的全妝，飽滿鮮豔的雙唇與精緻眼影'
+  },
+  makeupEn: {
+    '淡妝': 'clear and natural light makeup and moist glossy lips',
+    '全妝': 'exquisite full makeup with vibrant bold lips and detailed eyeshadow'
   }
 };
 
@@ -330,7 +339,7 @@ function updatePrompt() {
 
   // Construct Chinese Prompt
   const styleDescriptionZh = data.charStyle === '真人角色' ? '真人角色（自然拍攝，可見毛孔，鏡頭：85mm f/8）' : '動漫角色風格';
-  const zh = `${styleDescriptionZh}，製作一張三直排的人物設計參考圖（Character Sheet），主角是一位${data.age}的${data.race}，身高${data.height}cm，膚色${data.skinColor}，${bodyShapeZh}，${measurementsZh}，（占總照片的左邊80%）包含同一個人的：正視圖、側視圖、後視圖（${data.hairStyle}），以及在（其餘20%）由上而下加入3張面部特寫（側面45度+微笑）（中性）（合眼）。臉部細節：${data.faceShape}，${data.headSize}，${data.chin}，${data.eyeShape}，${data.nose}，${data.mouth}，${data.eyebrows}，清透自然的淡妝，水潤亮澤的雙唇。髮色：${data.hairColor}。服裝：${data.clothing}。純淨中性灰色攝影棚背景，均勻平鋪光影，極致細節，清晰對焦。 --ar ${data.aspectRatio}`;
+  const zh = `${styleDescriptionZh}，製作一張三直排的人物設計參考圖（Character Sheet），主角是一位${data.age}的${data.race}，身高${data.height}cm，膚色${data.skinColor}，${bodyShapeZh}，${measurementsZh}，（占總照片的左邊80%）包含同一個人的：正視圖、側視圖、後視圖（${data.hairStyle}），以及在（其餘20%）由上而下加入3張面部特寫（側面45度+微笑）（中性）（合眼）。臉部細節：${data.faceShape}，${data.headSize}，${data.chin}，${data.eyeShape}，${data.nose}，${data.mouth}，${data.eyebrows}，${translate('makeup', data.makeup)}。髮色：${data.hairColor}。服裝：${data.clothing}。純淨中性灰色攝影棚背景，均勻平鋪光影，極致細節，清晰對焦。採用 ${data.aspectRatio} 的橫向構圖。`;
 
   // Construct English Prompt for Gemini
   const isPhoto = data.charStyle === '真人角色';
@@ -338,7 +347,7 @@ function updatePrompt() {
   const sheetTypeEn = isPhoto ? 'Professional studio photography character study' : 'High-quality three-column character sheet';
   const qualityTokensEn = isPhoto ? 'commercial photography, highly detailed, sharp focus, deep depth of field, raw photography' : 'masterpiece, high quality illustration, clean lines';
 
-  const en = `${styleDescriptionEn}. A ${sheetTypeEn} for a character design reference, ${qualityTokensEn}. The main subject is a ${data.height}cm tall ${translate('race', data.race)} (${translate('age', data.age)}) with ${translate('skinColor', data.skinColor)}. She has a ${bodyShapeEn} with ${measurementsEn}. The image (80% of composition) features multiple perspectives of the same woman, including front, side, and back views (hair styled in a ${translate('hairStyle', data.hairStyle)}). The remaining 20% displays three detailed headshots ranging from a 45-degree profile to a smiling expression, all with a neutral, calm demeanor and closed eyes. Face details: ${translate('faceShape', data.faceShape)}, ${translate('headSize', data.headSize)}, ${translate('chin', data.chin)}, ${translate('eyeShape', data.eyeShape)}, ${translate('nose', data.nose)}, ${translate('mouth', data.mouth)}, and ${translate('eyebrows', data.eyebrows)}, with clear and natural light makeup and moist glossy lips. Her hair color is ${translate('hairColor', data.hairColor)}. She is wearing ${translate('clothing', data.clothing)}. Set against a neutral grey studio background with soft, flat cinematic lighting. The image should have a ${data.aspectRatio.replace(':', ' to ')} widescreen aspect ratio.`;
+  const en = `${styleDescriptionEn}. A ${sheetTypeEn} for a character design reference, ${qualityTokensEn}. The main subject is a ${data.height}cm tall ${translate('race', data.race)} (${translate('age', data.age)}) with ${translate('skinColor', data.skinColor)}. She has a ${bodyShapeEn} with ${measurementsEn}. The image (80% of composition) features multiple perspectives of the same woman, including front, side, and back views (hair styled in a ${translate('hairStyle', data.hairStyle)}). The remaining 20% displays three detailed headshots ranging from a 45-degree profile to a smiling expression, all with a neutral, calm demeanor and closed eyes. Face details: ${translate('faceShape', data.faceShape)}, ${translate('headSize', data.headSize)}, ${translate('chin', data.chin)}, ${translate('eyeShape', data.eyeShape)}, ${translate('nose', data.nose)}, ${translate('mouth', data.mouth)}, and ${translate('eyebrows', data.eyebrows)}, with ${translate('makeupEn', data.makeup)}. Her hair color is ${translate('hairColor', data.hairColor)}. She is wearing ${translate('clothing', data.clothing)}. Set against a neutral grey studio background with soft, flat cinematic lighting. The image composition features a ${data.aspectRatio.replace(':', ' to ')} aspect ratio.`;
 
   promptZh.innerText = zh;
   promptEn.innerText = en;
